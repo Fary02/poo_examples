@@ -20,7 +20,7 @@ Las tres juntas (`cl.dsy1102.ejemplos:rut:1.0.0`) identifican el artefacto de fo
 
 ```xml
 <properties>
-    <maven.compiler.release>25</maven.compiler.release>
+    <maven.compiler.release>21</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <clase.principal>cl.dsy1102.ejemplos.rut.Main</clase.principal>
     <junit.version>5.12.2</junit.version>
@@ -114,4 +114,4 @@ mvn compile exec:java -Dexec.args="7.654.321-6"
 | `no main manifest attribute, in target/rut-1.0.0.jar` | Falta `<archive><manifest><mainClass>`. |
 | `The parameters 'mainClass' for goal ...exec:java are missing` | Falta la configuración de exec. |
 | `Cannot access central in offline mode` | Ese plugin o dependencia nunca se descargó. Ejecuta el mismo comando una vez con internet. |
-| `release version 25 not supported` | El JDK instalado es anterior a 25. Instala JDK 25 o baja `maven.compiler.release`. |
+| `release version 21 not supported` | El JDK instalado es anterior a 21. Instala JDK 21. |

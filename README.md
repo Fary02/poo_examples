@@ -93,12 +93,12 @@ git checkout origin/solucion -- puntuales/02-polimorfismo/GUIA.md     # trae sol
 
 | Herramienta | Versión |
 |---|---|
-| JDK | 25 (LTS) |
+| JDK | 21 (LTS) |
 | Maven | 3.8 o superior (IntelliJ IDEA y NetBeans traen uno incorporado) |
-| Scene Builder | 25 o superior (opcional, recomendado para los casos con FXML) |
+| Scene Builder | 21 o superior (opcional, recomendado para los casos con FXML) |
 | MySQL | 8.0 o superior (solo para ejecutar los casos de EA3; las pruebas no lo necesitan) |
 
-Si tu equipo solo tiene JDK 21, cambia en el `pom.xml` del caso `maven.compiler.release` a `21` y, en los casos JavaFX, `javafx.version` a `21.0.6`. La versión mayor de JavaFX debe coincidir con la del JDK.
+Todos los casos usan `maven.compiler.release` 21 y, los casos JavaFX, `javafx.version` 21.0.6. La versión mayor de JavaFX debe coincidir con la del JDK: JavaFX 25 no funciona en JDK 21.
 
 ### Comandos (dentro de la carpeta del caso)
 

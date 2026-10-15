@@ -15,7 +15,7 @@
     <name>04 Maven - Validador de RUT</name>
 
     <properties>
-        <maven.compiler.release>25</maven.compiler.release>
+        <maven.compiler.release>21</maven.compiler.release>
         <!-- R2: sin esto Maven usa la codificacion del sistema y las tildes pueden romperse. -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Propiedades propias: se reutilizan con ${...} -->

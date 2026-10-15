@@ -14,10 +14,10 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- La version mayor de JavaFX debe coincidir con la del JDK.
-             Con JDK 21: release 21 y javafx.version 21.0.6 -->
-        <maven.compiler.release>25</maven.compiler.release>
-        <javafx.version>25.0.4</javafx.version>
+        <!-- Proyecto estandarizado en JDK 21 con JavaFX 21.0.6
+             (la version mayor de JavaFX debe coincidir con la del JDK). -->
+        <maven.compiler.release>21</maven.compiler.release>
+        <javafx.version>21.0.6</javafx.version>
     </properties>
 
     <dependencies>
@@ -69,10 +69,6 @@
                 <version>0.0.8</version>
                 <configuration>
                     <mainClass>cl.dsy1102.ejemplos.liga/cl.dsy1102.ejemplos.liga.AppLiga</mainClass>
-                    <options>
-                        <!-- Desde JDK 24 JavaFX necesita permiso para cargar bibliotecas nativas. -->
-                        <option>--enable-native-access=javafx.graphics</option>
-                    </options>
                 </configuration>
             </plugin>
         </plugins>

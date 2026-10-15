@@ -8,7 +8,7 @@
 |---|---|
 | **Indicadores** | IL 2.1 al IL 2.8 |
 | **Tiempo estimado** | 4 bloques |
-| **Tecnologías** | Java 25 · Maven · JavaFX 25 · FXML / Scene Builder · Jackson + `jackson-datatype-jsr310` |
+| **Tecnologías** | Java 21 · Maven · JavaFX 21 · FXML / Scene Builder · Jackson + `jackson-datatype-jsr310` |
 | **Temas** | Herencia, clases abstractas, interfaces, **enums con atributos**, **composición** (historial dentro del paciente), **fechas** (`LocalDate`, `DatePicker`), vista **maestro-detalle**, MVC, navegación, validación, Repository + DAO, JSON anidado |
 
 ---
