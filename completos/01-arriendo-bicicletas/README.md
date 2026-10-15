@@ -8,7 +8,7 @@
 |---|---|
 | **Indicadores** | IL 2.1 al IL 2.8 |
 | **Tiempo estimado** | 3 a 4 bloques |
-| **Tecnologías** | Java 25 · Maven · JavaFX 25 · FXML / Scene Builder · Jackson |
+| **Tecnologías** | Java 21 · Maven · JavaFX 21 · FXML / Scene Builder · Jackson |
 | **Temas** | Herencia, clases abstractas, interfaces, excepciones propias, MVC, `TableView`, navegación con paso de parámetros, validación, Repository + DAO, JSON |
 
 ---

@@ -8,7 +8,7 @@
 |---|---|
 | **Indicadores** | IL 3.1 al IL 3.5 |
 | **Tiempo estimado** | 180 minutos (como la EP3) |
-| **Tecnologías** | Java 25 · Maven · JavaFX 25 · FXML · MySQL 8 · JDBC (`mysql-connector-j`) · H2 para las pruebas |
+| **Tecnologías** | Java 21 · Maven · JavaFX 21 · FXML · MySQL 8 · JDBC (`mysql-connector-j`) · H2 para las pruebas |
 | **Temas** | Migrar la capa DAO de archivo a base de datos sin tocar los controladores, diseño de tablas (PK, FK, `UNIQUE`, `CHECK`, `NULL`), herencia en una tabla, `PreparedStatement`, transacciones, reportes con `JOIN` y `GROUP BY`, manejo de errores de base de datos en la interfaz |
 
 ---

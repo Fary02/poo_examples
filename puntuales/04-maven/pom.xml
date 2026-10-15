@@ -12,7 +12,7 @@
     <packaging>jar</packaging>
 
     <properties>
-        <maven.compiler.release>25</maven.compiler.release>
+        <maven.compiler.release>21</maven.compiler.release>
         <!-- TODO R2: fija la codificacion de los fuentes en UTF-8. -->
     </properties>
 
