@@ -1,42 +1,54 @@
 name: Compilar
 
 # Compila cada caso en cada push y pull request.
+# - Los casos se descubren solos: cualquier carpeta con un pom.xml (fuera de
+#   target/) entra a la validacion, asi un caso nuevo no puede quedar sin revisar.
 # - En main (codigo inicial) solo se compila: las pruebas de autoevaluacion
 #   fallan a proposito hasta que el estudiante resuelve el caso.
 # - En la rama solucion se ejecuta mvn verify: compila y corre las pruebas.
 #   Las pruebas de EA3 usan H2 en memoria: no necesitan un servidor MySQL.
+# Para impedir el merge de un caso roto, marca el check "Compilar" como
+# obligatorio en Settings > Branches > Branch protection rules.
 
 on:
   push:
     branches: ["**"]
   pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: compilar-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  compilar:
+  descubrir:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      casos: ${{ steps.buscar.outputs.casos }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Buscar casos (carpetas con pom.xml)
+        id: buscar
+        run: |
+          casos=$(find . -name pom.xml -not -path "*/target/*" -not -path "./.git/*" \
+            -exec dirname {} \; | sed 's|^\./||' | sort | jq -R . | jq -sc .)
+          echo "Casos encontrados: $casos"
+          if [ "$casos" = "[]" ]; then
+            echo "::error::No se encontro ningun pom.xml"
+            exit 1
+          fi
+          echo "casos=$casos" >> "$GITHUB_OUTPUT"
+
+  compilar:
+    needs: descubrir
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
-        caso:
-          - puntuales/01-herencia
-          - puntuales/02-polimorfismo
-          - puntuales/03-excepciones
-          - puntuales/04-maven
-          - puntuales/05-javafx-escenas
-          - puntuales/06-fxml-eventos
-          - puntuales/07-javafx-imagenes
-          - puntuales/08-tableview
-          - puntuales/09-navegacion
-          - puntuales/10-persistencia-json
-          - completos/01-arriendo-bicicletas
-          - completos/02-biblioteca
-          - completos/03-veterinaria
-          - ea3/parciales/01-conexion-jdbc
-          - ea3/parciales/02-consultas-resultset
-          - ea3/parciales/03-sentencias-parametrizadas
-          - ea3/parciales/04-transacciones
-          - ea3/parciales/05-refactor-dao-javafx
-          - ea3/general/almacen-don-kiwi
+        caso: ${{ fromJson(needs.descubrir.outputs.casos) }}
     name: ${{ matrix.caso }}
     steps:
       - uses: actions/checkout@v4
@@ -52,7 +64,20 @@ jobs:
         working-directory: ${{ matrix.caso }}
         run: |
           if [ "${GITHUB_REF_NAME}" = "solucion" ] || [ "${GITHUB_BASE_REF}" = "solucion" ]; then
-            mvn -B verify
+            mvn -B -ntp verify
           else
-            mvn -B compile
+            mvn -B -ntp compile
+          fi
+
+  resultado:
+    # Un solo check estable para marcar como obligatorio en la proteccion de rama.
+    needs: compilar
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verificar que todos los casos pasaron
+        run: |
+          if [ "${{ needs.compilar.result }}" != "success" ]; then
+            echo "::error::Al menos un caso no compila"
+            exit 1
           fi
