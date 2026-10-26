@@ -97,5 +97,6 @@ try (Writer escritor = Files.newBufferedWriter(archivo, StandardCharsets.UTF_8))
 | Cargar `List.class` en vez de `TypeToken` y recibir `ClassCastException` al usar los elementos | Gson creó `LinkedTreeMap` en vez del modelo. |
 | El programa acepta `numeroCuerdas = 99` desde el archivo | Falta llamar a `validar()` después de leer. |
 | `JsonIOException: Failed making field ... accessible` | Falta el `opens ... to com.google.gson`. |
+| `Unable to create instance of class ...` / `Cannot allocate class ...` al cargar (en IntelliJ o en module path; con `mvn exec:java` no aparece) | Falta `requires jdk.unsupported;`: el modelo no tiene constructor sin argumentos y Gson necesita `sun.misc.Unsafe` para crear los objetos. |
 | `module com.google.gson not found` | Falta la dependencia en el `pom.xml` o `requires` mal escrito. |
 | Tildes rotas en el archivo | Se usó `FileReader`/`FileWriter` sin indicar UTF-8. |
