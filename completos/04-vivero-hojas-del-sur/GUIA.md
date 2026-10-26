@@ -34,6 +34,7 @@ Agregar ─► PrincipalController ─► ventana modal (FormularioController va
 ```java
 module cl.dsy1102.vivero {
     requires javafx.controls;  requires javafx.fxml;  requires com.google.gson;
+    requires jdk.unsupported;
     opens cl.dsy1102.vivero.controller to javafx.fxml;
     opens cl.dsy1102.vivero.model to com.google.gson, javafx.base;
     exports cl.dsy1102.vivero;
@@ -43,6 +44,7 @@ module cl.dsy1102.vivero {
 - `controller → javafx.fxml`: FXML inyecta los atributos `@FXML` privados.
 - `model → com.google.gson`: Gson lee y escribe los atributos privados.
 - `model → javafx.base`: `PropertyValueFactory("nombre")` busca `getNombre()` por reflexión.
+- `jdk.unsupported`: el modelo no tiene constructor sin argumentos, así que Gson crea los objetos con `sun.misc.Unsafe`. En esta app llega igual por JavaFX, pero sin JavaFX (caso puntual 11) cargar falla con `Unable to create instance of class ...`.
 
 Si falta cualquiera, el proyecto **compila** pero falla al ejecutar. Los síntomas están al final de esta guía.
 
